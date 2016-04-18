@@ -1,0 +1,161 @@
+body{
+	background-color: ghostwhite;
+}
+.text-center {
+	text-align: center;
+	padding-top: 100px;
+	padding-bottom: 100px;
+}
+/* .btnSubmit {
+	color: #000;
+}
+.formbtn {
+	margin-top: 15px;
+	width: 150px;
+}
+ */
+.error {
+	color: red;
+}
+/* .backLink {
+	float: right;
+	padding-right: 16px;
+    color: #FFFAF4;
+}
+#btngrey {
+	background-color: #EEEEEE;
+	border-color: #EEEEEE;
+}
+.round {
+	border-radius: 10px;
+	margin: 30px;
+} */
+/*#clearMargin {
+	margin:0px;
+}*/
+/* .marginBottom {
+	margin-bottom: 25px;
+}
+.form-group {
+	right: 420px;
+	top: 120px;
+	display: inline-flex;
+	float: right;
+}
+.alignCenter {
+	text-align: center;
+	margin-top: -30px;
+} */
+td {
+	text-align: center;
+}
+thead td{
+	font-weight:bold;
+}
+/* .form-control {
+	margin-right: 10px;
+}
+.backBtn {
+	padding-right: 0px;
+	float: right;
+	margin-right: 15px;
+}
+.inputbox {
+	display:inline-block;
+	top:0px;
+}
+.clearFloat {
+	clear: both;
+}
+.addLeavebtn {
+	position: absolute;
+    margin-left: 15px;
+}
+.marginLeft {
+	margin-left: 5px;
+}
+.floatLeft {
+	float: left;
+}
+label {
+	color: #4F7DA5;
+}
+.seperator {
+	background-color: grey;
+}
+ */
+
+body{
+	background-color:#E6EBEC;
+}
+.container {
+    margin:0px;
+    width:100%;
+    padding:0px;
+}
+article{
+	padding:5px;
+	float: left;
+    width: 100%;
+}
+/* hr{
+	margin:3px;
+	border-top: 3px solid #CCC; 
+} */
+.head{
+	background-color: #B9CBD5;
+	font-size:12px;
+	font-weight:bold;
+	border-style: groove;
+	border-top-right-radius: 8px;	
+	border-top-left-radius: 8px;
+	padding: 10px;	
+}
+.bold{
+	font-weight:bold;
+}
+a{
+	text-decoration: underline;
+}
+span .error{
+	color:red;
+}
+/* .formEntries div {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.formEntries{
+    padding-bottom:10px;
+} */
+/* .table {
+	width : 98%;
+	margin : auto;
+	border : 1px solid;
+} */
+th{
+	color: rgba(0, 0, 255, 0.64);
+}
+.table th {
+   text-align: center;   
+}
+input[type="number"] {
+	width : 38px;
+	height: 23px;
+    border: 0px;
+	text-align: center;
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+select {
+	width : 145px;
+	height: 23px;
+	border: 0px;
+}
+
+table, th, td {
+   border: 1px solid black;
+}

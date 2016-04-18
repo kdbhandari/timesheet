@@ -1,0 +1,63 @@
+[	
+	{
+		"id": "1",
+		"production support": {
+			"id": "1",
+			"production support--1": {
+				"activity": "production support--1--1",
+				"activity": "production support--1--2"
+			},
+			"id": "2",
+			"production support--2": {
+				"activity": "production support--2--1",
+				"activity": "production support--2--2"
+			},
+			"id": "3",
+			"production support--3": {
+				"activity": "production support--3--1",
+				"activity": "production support--3--2"
+			}
+		},
+	},
+	{
+		"id": "2",
+		"project generic": {
+			"id": "1",
+			"project generic--1": {
+				"activity": "project generic--1--1",
+				"activity": "project generic--1--2"
+			},
+			"id": "2",
+			"project generic--2": {
+				"activity": "project generic--2--1",
+				"activity": "project generic--2--2"
+			},
+			"id": "3",
+			"project generic--3": {
+				"activity": "project generic--3--1",
+				"activity": "project generic--3--2"
+			}
+		},
+	},	
+	{
+		
+		"project management": {
+		
+			"project management--1": {
+				"activity": "project management--1--1",
+				"activity": "project management--1--2"
+			},
+		
+			"project management--2": {
+				"activity": "project management--2--1",
+				"activity": "project management--2--2"
+			},
+		
+			"project management--3": {
+				"activity": "project management--3--1",
+				"activity": "project management--3--2"
+			}
+		}
+
+	}
+]
