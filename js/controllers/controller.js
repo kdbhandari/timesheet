@@ -33,23 +33,28 @@ angular.module('myApp.controllers', ['myApp.services'])
 		$scope.rows = ['1'];
 		$scope.emp = {};
 		$scope.counter = 2;
-		$scope.task = {};
+		$scope.project_details = {};
+		$scope.task_details = {};
 		$scope.projects = [];
 		$scope.release = [];
 		$scope.features = [];
+		$scope.task = [];
+		$scope.subTask = [];
+		$scope.flagDel = false;
+		$scope.activity = ["activity-1", "activity-2", "activity-3", "activity-4", "activity-5"];
 		$http.get("/timesheet/data/project.json")
 			.success(function(data,status,headers,config){
-				console.log("inside success");
-				$scope.task = data;
-				console.log("data : "+data);		
-				angular.forEach($scope.task, function(key, value) {
+				//console.log("inside success");
+				$scope.project_details = data;
+				//console.log("data : "+data);		
+				angular.forEach($scope.project_details, function(key, value) {
 					angular.forEach(key, function(key, value) {
 						$scope.projects.push(value);
-						console.log("value : " + value );
+						//console.log("value : " + value );
 						angular.forEach(key, function(key, value) {
-							console.log("value : " + value );
+							//console.log("value : " + value );
 							angular.forEach(key, function(key, value) {
-								console.log("key : " + key);	
+								//console.log("key : " + key);	
 							});	
 						});	
 					});	
@@ -58,33 +63,77 @@ angular.module('myApp.controllers', ['myApp.services'])
 			.error(function(data,status,headers,config){
 				console.log("Data Not Loaded");
 			});
-		
-	$scope.setRelease = function(project){
-		$scope.release = [];
-		angular.forEach($scope.task, function(key, value) {
+		$http.get("/timesheet/data/task.json")
+			.success(function(data,status,headers,config){
+				//console.log("inside success");
+				$scope.task_details = data;
+				//console.log("data : "+data);		
+				angular.forEach($scope.task_details, function(key, value) {
+					angular.forEach(key, function(key, value) {
+						$scope.task.push(value);
+						//console.log("key : "+ key +" value : " + value );
+						angular.forEach(key, function(key, value) {
+							//console.log("key : "+ key);
+						});	
+					});	
+				});	
+			})
+			.error(function(data,status,headers,config){
+				console.log("Data Not Loaded");
+			});
+			
+	$scope.setRelease = function(project, count){
+		//$scope.release = [];
+		$scope.temp = [];
+		console.log("count : "+count);
+		angular.forEach($scope.project_details, function(key, value) {
 			angular.forEach(key, function(key, value) {
 				if(value == project)
 				{	
 					angular.forEach(key, function(key, value) {
-						$scope.release.push(value);	
+						$scope.temp.push(value);	
 					});
+					//$scope.release.push($scope.temp);
+					$scope.release.splice(count-1, 1);
+					$scope.release.splice(count-1, 0, $scope.temp);
 				}		
 			});
 		});
 	}
 		
-	$scope.setFeatures = function(release){
-		$scope.features = [];
-		angular.forEach($scope.task, function(key, value) {
+	$scope.setFeatures = function(release, count){
+		//$scope.features = [];
+		$scope.temp = [];
+		angular.forEach($scope.project_details, function(key, value) {
 			angular.forEach(key, function(key, value) {
 				angular.forEach(key, function(key, value) {
 					if(value == release)
 					{	
 						angular.forEach(key, function(key, value) {
-							$scope.features.push(key);
+							$scope.temp.push(key);
 						}); 	
+						$scope.features.splice(count-1, 1);
+						$scope.features.splice(count-1, 0, $scope.temp);
 					}	
 				});	
+			});	
+		});
+	}
+	
+	$scope.setSubTask = function(task, count){
+		//console.log("inside function");
+		//console.log("task : " + task);
+		//$scope.subTask = [];
+		$scope.temp = [];
+		angular.forEach($scope.task_details, function(key, value) {
+			angular.forEach(key, function(key, value) {
+				if(value == task){
+					angular.forEach(key, function(key, value) {
+						$scope.temp.push(key);	
+					});	
+					$scope.subTask.splice(count-1, 1);
+					$scope.subTask.splice(count-1, 0, $scope.temp);
+				}
 			});	
 		});
 	}
@@ -93,6 +142,21 @@ angular.module('myApp.controllers', ['myApp.services'])
 	$scope.addRow = function() {
 		$scope.rows.push($scope.counter);
 		$scope.counter++;
+		$scope.flagDel = false;
+		$scope.release.push("");
+		$scope.features.push("");
+		$scope.subTask.push("");
+	}
+	$scope.delteRow = function() {
+		$scope.counter--;
+		$scope.rows.splice($scope.counter-1, 1);
+		$scope.emp[$scope.counter] = '';
+		if(($scope.counter-1) == 0)
+		{
+			$scope.flagDel = true;
+			$scope.emp[$scope.counter] = '';
+			$scope.addRow();
+		}
 	}
 
 	$scope.total_row = function(rowContent) {
@@ -126,6 +190,7 @@ angular.module('myApp.controllers', ['myApp.services'])
 				//$scope.isSubmitted = true;
 				$('select').attr('disabled', true);
 				$('#submit').attr('disabled', true);
+				$('input').attr('disabled', true);
             },
             function (error) {
                 console.log("OOPS Error while submitting timesheet!!!! " + JSON.stringify(error));
