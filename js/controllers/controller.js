@@ -163,6 +163,24 @@ angular.module('myApp.controllers', ['myApp.services'])
 		//console.log("function called");
 		//console.log(rowContent);
 		//console.log($scope.emp[rowContent].total);
+		
+		var a = document.querySelectorAll('input.days');
+		for(var i=0; i<a.length; i++){
+			a[i].addEventListener('input', function(e) {
+				//$('input.days').addEventListener('input', function(e) {	
+				console.log("inside queryselector");
+				console.log("e.target.value : "+ e.target.value);
+				if (e.target.value < '0' || e.target.value > '24') {
+					alert('Invalid number!');
+					e.target.value = '';
+					e.preventDefault();
+				}
+			});	
+		}
+		
+		
+		
+		
 		var total = 0;
 		angular.forEach($scope.emp, function(value, key) {
 			//console.log("key : " + key + "value : "+ value);
@@ -170,7 +188,7 @@ angular.module('myApp.controllers', ['myApp.services'])
 				angular.forEach($scope.emp[key], function(value, key) {
 					//console.log("key : " + key + "value : "+ value);
 					//console.log($scope.emp[key]);
-					if( key == "sunday" || key == "monday" || key == "tuesday" || key == "wednesday" || key 	== "thursday" || key == "friday" || key == "saturday" ) 
+					if( key == "sunday" || key == "monday" || key == "tuesday" || key == "wednesday" || 	key	== "thursday" || key == "friday" || key == "saturday") 
 					{
 						total = total + value;		
 					}	
