@@ -65,14 +65,29 @@
 									</td>
 								</div>
 								<div class="col-md-5">
-									<td><input type=number min=0.00 max=24.00 ng-model="emp[rowContent].sunday" ng-change="total_row(rowContent)" step=0.01 placeholder="0.00" ng-disabled="!emp[rowContent].activity" /></td>
-									<td><input type=number min=0.00 max=24.00 ng-model="emp[rowContent].monday" ng-change="total_row(rowContent)" step=0.01 placeholder="0.00" ng-disabled="!emp[rowContent].activity" /></td>
-									<td><input type=number min=0.00 max=24.00 ng-model="emp[rowContent].tuesday" ng-change="total_row(rowContent)" step=0.01 placeholder="0.00" ng-disabled="!emp[rowContent].activity" /></td>
-									<td><input type=number min=0.00 max=24.00 ng-model="emp[rowContent].wednesday" ng-change="total_row(rowContent)" step=0.01 placeholder="0.00" ng-disabled="!emp[rowContent].activity" /></td>
-									<td><input type=number min=0.00 max=24.00 ng-model="emp[rowContent].thursday" ng-change="total_row(rowContent)" step=0.01 placeholder="0.00" ng-disabled="!emp[rowContent].activity" /></td>
-									<td><input type=number min=0.00 max=24.00 ng-model="emp[rowContent].friday" ng-change="total_row(rowContent)" step=0.01 placeholder="0.00" ng-disabled="!emp[rowContent].activity" /></td>
-									<td><input type=number min=0.00 max=24.00 ng-model="emp[rowContent].saturday" ng-change="total_row(rowContent)" step=0.01 placeholder="0.00" ng-disabled="!emp[rowContent].activity" /></td>
-									<td><input required min=0.01 type=number ng-disabled="true" ng-model="emp[rowContent].total" step=0.01 placeholder="0.00" /></td>
+									<td>
+										<input class="days" min=0 max=24 type=number ng-model="emp[rowContent].sunday" ng-change="total_row(rowContent)" step=0.01 placeholder="0.00" ng-disabled="!emp[rowContent].activity || !emp[rowContent].feature || !emp[rowContent].sub_task_type" />
+									</td>
+									<td>
+										<input class="days" min=0 max=24 type=number ng-model="emp[rowContent].monday" ng-change="total_row(rowContent)" step=0.01 placeholder="0.00" ng-disabled="!emp[rowContent].activity || !emp[rowContent].feature || !emp[rowContent].sub_task_type" />
+									</td>
+									<td>
+										<input class="days" min=0 max=24 type=number ng-model="emp[rowContent].tuesday" ng-change="total_row(rowContent)" step=0.01 placeholder="0.00" ng-disabled="!emp[rowContent].activity || !emp[rowContent].feature || !emp[rowContent].sub_task_type" />
+									</td>
+									<td>
+										<input class="days" min=0 max=24 type=number ng-model="emp[rowContent].wednesday" ng-change="total_row(rowContent)" step=0.01 placeholder="0.00" ng-disabled="!emp[rowContent].activity || !emp[rowContent].feature || !emp[rowContent].sub_task_type" />
+									</td>
+									<td>
+										<input class="days" min=0 max=24 type=number ng-model="emp[rowContent].thursday" ng-change="total_row(rowContent)" step=0.01 placeholder="0.00" ng-disabled="!emp[rowContent].activity || !emp[rowContent].feature || !emp[rowContent].sub_task_type" />
+									</td>
+									<td>
+										<input class="days" min=0 max=24 type=number ng-model="emp[rowContent].friday" ng-change="total_row(rowContent)" step=0.01 placeholder="0.00" ng-disabled="!emp[rowContent].activity || !emp[rowContent].feature || !emp[rowContent].sub_task_type" />
+									</td>
+									<td>
+										<input class="days" min=0 max=24 type=number ng-model="emp[rowContent].saturday" ng-change="total_row(rowContent)" step=0.01 placeholder="0.00" ng-disabled="!emp[rowContent].activity || !emp[rowContent].feature || !emp[rowContent].sub_task_type" /></td>
+									<td>
+										<input required min=0.01 type=number ng-disabled="true" ng-model="emp[rowContent].total" step=0.01 placeholder="0.00" />
+									</td>
 								</div>
 							</tr>
 							
