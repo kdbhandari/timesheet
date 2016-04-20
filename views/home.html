@@ -6,7 +6,7 @@
 	<form name="loginForm" ng-submit="auth()">
 		<input type="text" class="form-control inputbox" placeholder="Enter your username" ng-model="emp.username" ng-required="true">
 		<input type="password" class="form-control inputbox" placeholder="Password" ng-model="emp.password" ng-required="true">
-		<button class="btn btn-info" ng-click="login()" type="submit" ng-disabled="loginForm.$invalid">Submit</button>
+		<button class="btn btn-info" type="submit" ng-disabled="loginForm.$invalid">Submit</button>
 		
 	</form>
 </div>
