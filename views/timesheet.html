@@ -1,21 +1,15 @@
 <section id = "secTodoApp">
 	<article class="head">
-        <div style="display:inline-block">
-            <span>My Personals</span>
-            
-            {{empUsername}}
-        <!-- <div style="float:right">
-            <span>FAQs</span>
-                    <span>image-minimise</span>
-                    <span>image-cross</span>
-        </div>
- -->        <!-- <div style="clear:both"></div> -->
+        <div class="username">
+            <!-- <span>My Personals</span> -->
+            WELCOME {{empUsername | uppercase}}
+		</div>	
     </article>
 	<article>
 		<div class="col-md-12">
 			<form name="myForm" novalidate>
 				<div class="row col-md-12">
-					<table>
+					<table style="margin-bottom: 20px">
 						<thead>
 							<tr>
 								<div class="col-md-7">
@@ -45,46 +39,46 @@
 								<div class="col-md-7">	
 									<td>{{rowContent}}</td>
 									<td>
-										<select required ng-model="emp[rowContent].project" ng-options="o as o for o in projects" ng-change='setRelease(emp[rowContent].project, rowContent)'></select>
+										<select required ng-model="emp[rowContent].project" ng-options="o as o for o in projects" ng-change='setRelease(emp[rowContent].project, rowContent)'><option value="">-----select-----</option></select>
 									</td>
 									<td>
-										<select required ng-model="emp[rowContent].release" ng-options="o as o for o in release[rowContent-1]" ng-change='setFeatures(emp[rowContent].release, rowContent)' ng-disabled="!emp[rowContent].project"></select>
+										<select required ng-model="emp[rowContent].release" ng-options="o as o for o in release[rowContent-1]" ng-change='setFeatures(emp[rowContent].release, rowContent)' ng-disabled="!emp[rowContent].project"><option value="">-----select-----</option></select>
 									</td>
 									
 									<td>
-										<select required ng-model="emp[rowContent].feature" ng-options="o as o for o in features[rowContent-1]" ng-disabled="!emp[rowContent].release"></select>
+										<select required ng-model="emp[rowContent].feature" ng-options="o as o for o in features[rowContent-1]" ng-disabled="!emp[rowContent].release"><option value="">-----select-----</option></select>
 									</td>
 									<td>
-										<select required ng-model="emp[rowContent].task_type" ng-options="o as o for o in task" ng-change='setSubTask(emp[rowContent].task_type, rowContent)'></select>
+										<select required ng-model="emp[rowContent].task_type" ng-options="o as o for o in task" ng-change='setSubTask(emp[rowContent].task_type, rowContent)'><option value="">-----select-----</option></select>
 									</td>
 									<td>
-										<select required ng-model="emp[rowContent].sub_task_type" ng-options="o as o for o in subTask[rowContent-1]" ng-disabled="!emp[rowContent].task_type"></select>
+										<select required ng-model="emp[rowContent].sub_task_type" ng-options="o as o for o in subTask[rowContent-1]" ng-disabled="!emp[rowContent].task_type"><option value="">-----select-----</option></select>
 									</td>
 									<td>
-										<select required ng-model="emp[rowContent].activity" ng-options="o as o for o in activity" ></select>
+										<select required ng-model="emp[rowContent].activity" ng-options="o as o for o in activity" ><option value="">-----select-----</option></select>
 									</td>
 								</div>
 								<div class="col-md-5">
 									<td>
-										<input class="days" min=0 max=24 type=number ng-model="emp[rowContent].sunday" ng-change="total_row(rowContent)" step=0.01 placeholder="0.00" ng-disabled="!emp[rowContent].activity || !emp[rowContent].feature || !emp[rowContent].sub_task_type" />
+										<input class="days" type=number ng-model="emp[rowContent].sunday" ng-change="total_row(rowContent, emp[rowContent].sunday, 'sunday')" step=0.01 placeholder="0.00" ng-disabled="!emp[rowContent].activity || !emp[rowContent].feature || !emp[rowContent].sub_task_type" />
 									</td>
 									<td>
-										<input class="days" min=0 max=24 type=number ng-model="emp[rowContent].monday" ng-change="total_row(rowContent)" step=0.01 placeholder="0.00" ng-disabled="!emp[rowContent].activity || !emp[rowContent].feature || !emp[rowContent].sub_task_type" />
+										<input class="days" type=number ng-model="emp[rowContent].monday" ng-change="total_row(rowContent, emp[rowContent].monday, 'monday')" step=0.01 placeholder="0.00" ng-disabled="!emp[rowContent].activity || !emp[rowContent].feature || !emp[rowContent].sub_task_type" />
 									</td>
 									<td>
-										<input class="days" min=0 max=24 type=number ng-model="emp[rowContent].tuesday" ng-change="total_row(rowContent)" step=0.01 placeholder="0.00" ng-disabled="!emp[rowContent].activity || !emp[rowContent].feature || !emp[rowContent].sub_task_type" />
+										<input type=number ng-model="emp[rowContent].tuesday" ng-change="total_row(rowContent, emp[rowContent].tuesday, 'tuesday')" step=0.01 placeholder="0.00" ng-disabled="!emp[rowContent].activity || !emp[rowContent].feature || !emp[rowContent].sub_task_type" />
 									</td>
 									<td>
-										<input class="days" min=0 max=24 type=number ng-model="emp[rowContent].wednesday" ng-change="total_row(rowContent)" step=0.01 placeholder="0.00" ng-disabled="!emp[rowContent].activity || !emp[rowContent].feature || !emp[rowContent].sub_task_type" />
+										<input type=number ng-model="emp[rowContent].wednesday" ng-change="total_row(rowContent, emp[rowContent].wednesday, 'wednesday')" step=0.01 placeholder="0.00" ng-disabled="!emp[rowContent].activity || !emp[rowContent].feature || !emp[rowContent].sub_task_type" />
 									</td>
 									<td>
-										<input class="days" min=0 max=24 type=number ng-model="emp[rowContent].thursday" ng-change="total_row(rowContent)" step=0.01 placeholder="0.00" ng-disabled="!emp[rowContent].activity || !emp[rowContent].feature || !emp[rowContent].sub_task_type" />
+										<input class="days" type=number ng-model="emp[rowContent].thursday" ng-change="total_row(rowContent, emp[rowContent].thursday, 'thursday')" step=0.01 placeholder="0.00" ng-disabled="!emp[rowContent].activity || !emp[rowContent].feature || !emp[rowContent].sub_task_type" />
 									</td>
 									<td>
-										<input class="days" min=0 max=24 type=number ng-model="emp[rowContent].friday" ng-change="total_row(rowContent)" step=0.01 placeholder="0.00" ng-disabled="!emp[rowContent].activity || !emp[rowContent].feature || !emp[rowContent].sub_task_type" />
+										<input class="days" type=number ng-model="emp[rowContent].friday" ng-change="total_row(rowContent, emp[rowContent].friday, 'friday')" step=0.01 placeholder="0.00" ng-disabled="!emp[rowContent].activity || !emp[rowContent].feature || !emp[rowContent].sub_task_type" />
 									</td>
 									<td>
-										<input class="days" min=0 max=24 type=number ng-model="emp[rowContent].saturday" ng-change="total_row(rowContent)" step=0.01 placeholder="0.00" ng-disabled="!emp[rowContent].activity || !emp[rowContent].feature || !emp[rowContent].sub_task_type" /></td>
+										<input class="days" type=number ng-model="emp[rowContent].saturday" ng-change="total_row(rowContent, emp[rowContent].saturday, 'saturday')" step=0.01 placeholder="0.00" ng-disabled="!emp[rowContent].activity || !emp[rowContent].feature || !emp[rowContent].sub_task_type" /></td>
 									<td>
 										<input required min=0.01 type=number ng-disabled="true" ng-model="emp[rowContent].total" step=0.01 placeholder="0.00" />
 									</td>
@@ -95,20 +89,15 @@
 						
 					</table>	
 				</div>
-					<input class="button" id="submit" type="submit" ng-click="submitForm(emp)" value="Submit" ng-disabled="myForm.$invalid" class="btn btn-default" />
+					<button id="submit" class="btn btn-default" ng-disabled="myForm.$invalid" type="button" ng-click="submitForm()">Submit</button>
+					<button class="btn btn-default" type="button" ng-click="addRow()">Add Row</button>
+					<button class="btn btn-default" type="button" ng-disabled="flagDel"ng-click="delteRow()">Delete Row</button>
+					<button class="btn btn-default" type="button" ng-click="reset()">Reset</button>
 			</form>
-			<button class="button" ng-click="addRow()">Add Row</button>
-			<button class="button" ng-disabled="flagDel"ng-click="delteRow()">Delete Row</button>
+			
 		</div>
-		<pre>{{emp | json}}</pre>
+		<!-- <pre>{{emp | json}}</pre> -->
 		<!-- <pre>{{project_details | json}}</pre>
-		<pre>{{task_details | json}}</pre> -->
-		<!-- 
-		{{task[0]}}
-		 -->
-		
-		
-		
-		
+		<pre>{{task_details | json}}</pre> -->	
 	</article>
 </section>

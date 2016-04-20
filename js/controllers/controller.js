@@ -1,7 +1,7 @@
 angular.module('myApp.controllers', ['myApp.services'])
 .controller('LoginCtrl', function($http,$scope,$routeParams, $location, EmployeeService){
         $scope.employee = {};
-		$http.get("/timesheet/data/login_records.json")
+		$http.get("data/login_records.json")
 			.success(function(data,status,headers,config){
 				$scope.employee = data;
 				
@@ -9,9 +9,6 @@ angular.module('myApp.controllers', ['myApp.services'])
 			.error(function(data,status,headers,config){
 				console.log("Data Not Loaded");
 			});
-		/* $scope.login = function() {
-					EmployeeService.setEmployee($scope.emp.empCode);
-        }; */
         $scope.auth = function(){
 			angular.forEach($scope.employee, function(value, key) {
 				if(value.userid == $scope.emp.username && value.password == $scope.emp.password) 
@@ -41,6 +38,7 @@ angular.module('myApp.controllers', ['myApp.services'])
 		$scope.task = [];
 		$scope.subTask = [];
 		$scope.flagDel = false;
+		$scope.max = 1;
 		$scope.activity = ["activity-1", "activity-2", "activity-3", "activity-4", "activity-5"];
 		$http.get("/timesheet/data/project.json")
 			.success(function(data,status,headers,config){
@@ -83,7 +81,6 @@ angular.module('myApp.controllers', ['myApp.services'])
 			});
 			
 	$scope.setRelease = function(project, count){
-		//$scope.release = [];
 		$scope.temp = [];
 		console.log("count : "+count);
 		angular.forEach($scope.project_details, function(key, value) {
@@ -93,7 +90,6 @@ angular.module('myApp.controllers', ['myApp.services'])
 					angular.forEach(key, function(key, value) {
 						$scope.temp.push(value);	
 					});
-					//$scope.release.push($scope.temp);
 					$scope.release.splice(count-1, 1);
 					$scope.release.splice(count-1, 0, $scope.temp);
 				}		
@@ -146,6 +142,8 @@ angular.module('myApp.controllers', ['myApp.services'])
 		$scope.release.push("");
 		$scope.features.push("");
 		$scope.subTask.push("");
+		$scope.max = $scope.max + 1;
+		console.log("max : "+$scope.max);
 	}
 	$scope.delteRow = function() {
 		$scope.counter--;
@@ -157,30 +155,21 @@ angular.module('myApp.controllers', ['myApp.services'])
 			$scope.emp[$scope.counter] = '';
 			$scope.addRow();
 		}
+		//$scope.emp.splice($scope.max--, 1);
+		delete $scope.emp[$scope.max--];
+	}
+	$scope.reset = function() {
+		$scope.emp = {};
 	}
 
-	$scope.total_row = function(rowContent) {
-		//console.log("function called");
-		//console.log(rowContent);
-		//console.log($scope.emp[rowContent].total);
-		
-		var a = document.querySelectorAll('input.days');
-		for(var i=0; i<a.length; i++){
-			a[i].addEventListener('input', function(e) {
-				//$('input.days').addEventListener('input', function(e) {	
-				console.log("inside queryselector");
-				console.log("e.target.value : "+ e.target.value);
-				if (e.target.value < '0' || e.target.value > '24') {
-					alert('Invalid number!');
-					e.target.value = '';
-					e.preventDefault();
-				}
-			});	
+	$scope.total_row = function(rowContent, hrs, day) {
+		if ($scope.emp[rowContent][day] < 0 || $scope.emp[rowContent][day] > 24) 
+		{
+			alert('Invalid hours for the day...!!!');
+			$scope.emp[rowContent][day] = '';
 		}
-		
-		
-		
-		
+		/* console.log($scope.emp[rowContent].sunday);
+		$scope.emp[rowContent].total = $scope.emp[rowContent].sunday + $scope.emp[rowContent].monday + $scope.emp[rowContent].tuesday + $scope.emp[rowContent].wednesday + $scope.emp[rowContent].thursday + $scope.emp[rowContent].friday + $scope.emp[rowContent].saturday; */
 		var total = 0;
 		angular.forEach($scope.emp, function(value, key) {
 			//console.log("key : " + key + "value : "+ value);
@@ -200,14 +189,11 @@ angular.module('myApp.controllers', ['myApp.services'])
 		});
 	}
 		
-	$scope.submitForm = function () {
+	$scope.submitForm = function (emp) {
         submitTimesheetService.submitForm($scope.emp)
             .then(function (answer) {
-				//var myEl = angular.element( document.querySelector( 'select' ));
-				//myEl.attr('disabled',true);	
-				//$scope.isSubmitted = true;
 				$('select').attr('disabled', true);
-				$('#submit').attr('disabled', true);
+				$('button').attr('disabled', true);
 				$('input').attr('disabled', true);
             },
             function (error) {
